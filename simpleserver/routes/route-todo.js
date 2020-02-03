@@ -4,6 +4,8 @@ var router = express.Router();
 const mongo = require('../mongo/mongo');
 const collectionName = "todo";
 
+const ObjectId = require('mongodb').ObjectId;
+
 router.get('/', function (req, res) {
   const promise = mongo.db.collection(collectionName).find({}).toArray();
   promise.then(v => {
@@ -21,17 +23,20 @@ router.post('/', function (req, res) {
 })
 
 router.patch('/', (req, res) => {
+  console.log('patchhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
   const { body } = req;
+
+  console.log(body);
 
   const set = {
     $set: {
-      methodname: body.text
+      name: body.name
     }
   };
 
   const promise = mongo.db.collection(collectionName).update(
     {
-      _id: ObjectId(body.id)
+      _id: ObjectId(body._id)
     },
     set);
 
@@ -42,9 +47,10 @@ router.patch('/', (req, res) => {
 
 router.delete('/', (req, res) => {
   const { body } = req;
+  console.log (body);
   const promise = mongo.db.collection(collectionName).removeOne(
     {
-      _id: ObjectId(body.id)
+      id:body.id
     });
   promise.then(v => {
     res.send(v);
