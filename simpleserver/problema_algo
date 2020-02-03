@@ -1,0 +1,30 @@
+function nr(x) {
+    let c = 1;
+    do{
+        x = x% 2 == 1 ? x*3+1: x/2;
+        c++;    
+    }while(x!==1);
+ return c;
+}
+
+function max(a,b){
+    let m=0;
+    for(let i=a;i<=b;i++) {
+        let r = nr(i);
+        if(r>m) {
+            m = r;
+        }
+    }
+    return m;
+}
+
+function max1(a,b){
+    let m=0;
+    for(let i=a;i<=b;i++) {
+        let r = nr(i);
+        if(r>m) {
+            m = r;
+        }
+    }
+    return m;
+}
